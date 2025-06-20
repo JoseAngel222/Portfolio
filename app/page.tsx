@@ -113,6 +113,7 @@ export default function Portfolio() {
       tech: ["Spring Boot", "Java", "JUnit5", "Scrum", "JPA", "APIRest", "PostgreSQL", "React(Vite)", "JWT"],
       role: t.projects[2].role,
       type: t.projects[2].type,
+      link: "https://economically-e.vercel.app/#inicio",
     },
     {
       title: t.projects[0].title,
@@ -123,19 +124,25 @@ export default function Portfolio() {
     },
   ]
 
+  const handleProjectClick = (link?: string) => {
+    if (link) {
+      window.open(link, "_blank", "noopener,noreferrer")
+    }
+  }
+
   const renderHome = () => (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="min-h-screen flex flex-col justify-center items-center text-center space-y-12 px-4">
+      <div className="min-h-screen flex flex-col justify-center items-center text-center space-y-12 px-4 pt-24 md:pt-0">
         <div className="space-y-8 max-w-4xl">
           <div className="space-y-4">
             <h1
-              className={`text-5xl md:text-7xl font-extralight tracking-tight mb-6 ${darkMode ? "text-blue-300" : "text-blue-800"}`}
+              className={`text-4xl sm:text-5xl md:text-7xl tracking-tight mb-6 leading-8 font-extralight mt-[25px] px-0 py-40 pb-[0] pt-0 ${darkMode ? "text-blue-300" : "text-blue-800"}`}
             >
               José Angel López
             </h1>
             <h2
-              className={`text-2xl md:text-3xl font-light tracking-wide mb-8 ${darkMode ? "text-blue-200" : "text-blue-700"}`}
+              className={`text-xl sm:text-2xl md:text-3xl font-light tracking-wide mb-8 ${darkMode ? "text-blue-200" : "text-blue-700"}`}
             >
               {t.hero.title}
             </h2>
@@ -148,12 +155,12 @@ export default function Portfolio() {
           </div>
 
           <div
-            className={`max-w-3xl mx-auto space-y-6 text-lg md:text-xl leading-relaxed font-light ${darkMode ? "text-blue-100" : "text-gray-700"}`}
+            className={`max-w-3xl mx-auto space-y-6 text-base md:text-lg lg:text-xl leading-relaxed font-light ${darkMode ? "text-blue-100" : "text-gray-700"}`}
           >
             <p>{t.hero.bio1}</p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-12">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mt-12">
             <Button
               variant="outline"
               size="lg"
@@ -297,11 +304,14 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <Card
                 key={index}
+                onClick={() => handleProjectClick(project.link)}
                 className={`${
                   darkMode
                     ? "bg-blue-900/20 border-blue-400/20 hover:bg-blue-900/30"
                     : "bg-blue-50/80 border-blue-200 hover:bg-blue-50"
-                } backdrop-blur-sm transition-all duration-300 hover:shadow-lg`}
+                } backdrop-blur-sm transition-all duration-300 hover:shadow-lg ${
+                  project.link ? "cursor-pointer hover:scale-105" : ""
+                }`}
               >
                 <CardContent className="p-8 space-y-6">
                   <div className="space-y-2">
@@ -313,6 +323,9 @@ export default function Portfolio() {
                       >
                         {project.type}
                       </span>
+                      {project.link && (
+                        <ExternalLink className={`h-4 w-4 ${darkMode ? "text-blue-300" : "text-blue-600"}`} />
+                      )}
                     </div>
                     <h3 className={`text-xl font-medium tracking-wide ${darkMode ? "text-blue-300" : "text-blue-800"}`}>
                       {project.title}
@@ -367,7 +380,7 @@ export default function Portfolio() {
   )
 
   const renderPortfolio = () => (
-    <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-20 px-4 pt-24 md:pt-20">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1
@@ -380,13 +393,16 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <div className="space-y-12">
+         <div className="space-y-12">
           {projects.map((project, index) => (
             <Card
               key={index}
+              onClick={() => handleProjectClick(project.link)}
               className={`${
                 darkMode ? "bg-blue-900/20 border-blue-400/20" : "bg-blue-50/80 border-blue-200"
-              } backdrop-blur-sm`}
+              } backdrop-blur-sm transition-all duration-300 ${
+                project.link ? "cursor-pointer hover:shadow-lg hover:scale-[1.02]" : ""
+              }`}
             >
               <CardContent className="p-8 md:p-12">
                 <div className="grid md:grid-cols-3 gap-8">
@@ -405,6 +421,9 @@ export default function Portfolio() {
                         >
                           {project.role}
                         </span>
+                        {project.link && (
+                          <ExternalLink className={`h-4 w-4 ${darkMode ? "text-blue-300" : "text-blue-600"}`} />
+                        )}
                       </div>
                       <h2
                         className={`text-2xl md:text-3xl font-extralight tracking-tight ${darkMode ? "text-blue-300" : "text-blue-800"}`}
@@ -451,7 +470,7 @@ export default function Portfolio() {
   )
 
   const renderContact = () => (
-    <div className="min-h-screen py-20 px-4 flex items-center justify-center">
+    <div className="min-h-screen py-20 px-4 flex items-center justify-center pt-24 md:pt-20">
       <div className="max-w-2xl mx-auto w-full">
         <div className="text-center mb-16">
           <h1
@@ -585,9 +604,9 @@ export default function Portfolio() {
           darkMode ? "bg-slate-900/80 border-blue-400/10" : "bg-white/80 border-blue-200/50"
         } backdrop-blur-md border-b`}
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
           <div className="flex justify-between items-center">
-            <div className="flex space-x-8">
+            <div className="flex space-x-4 md:space-x-8">
               {[
                 { key: "home", label: t.navigation.home },
                 { key: "portfolio", label: t.navigation.portfolio },
@@ -596,7 +615,7 @@ export default function Portfolio() {
                 <button
                   key={key}
                   onClick={() => setActiveSection(key)}
-                  className={`font-medium tracking-wide transition-all duration-300 ${
+                  className={`text-sm md:text-base font-medium tracking-wide transition-all duration-300 ${
                     activeSection === key
                       ? darkMode
                         ? "text-blue-400 border-b-2 border-blue-400/50 pb-1"

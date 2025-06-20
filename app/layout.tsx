@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "José Angel López - Full Stack Developer",
   description:
-    "Desarrollador Web Full Stack especializado en JavaScript, React, Java y Spring Boot. Disponible para oportunidades laborales.",
+    "Desarrollador Web Full Stack especializado en JavaScript, React, Java y Spring Boot.",
 }
 
 export default function RootLayout({
